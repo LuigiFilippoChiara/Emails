@@ -12,6 +12,7 @@ import ssl
 from getpass import getpass
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+import re
 
 
 def get_user_input_protocol():
@@ -122,6 +123,24 @@ def write_email(sender_email, receiver_email):
     message.attach(part2)
 
     return message
+
+def insert_valid_email(who, domain=None):
+    if domain:
+        EMAIL_REGEX = re.compile(fr'^[a-z0-9_\.-]+@{domain}$')
+    else:
+        EMAIL_REGEX = re.compile(r'^[a-z0-9_\.-]+@[0-9a-z\.-]+\.[a-z\.]{2,6}$')
+
+    while True:
+        email = input(f'Enter {who} email: ')
+        match = EMAIL_REGEX.fullmatch(email)
+        if match:
+            break
+        if domain:
+            print(f"Sorry, this is not a valid email. Remember to use the {domain} domain.")
+        else:
+            print(f"Sorry, this is not a valid email.")
+
+    return match.group()
 
 
 send_email_func_dict = {'ssl': send_email_ssl,

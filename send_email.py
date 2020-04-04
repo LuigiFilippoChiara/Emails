@@ -9,14 +9,20 @@
 
 import utils
 
+# TODO: deal with multiple receiver mails
+# TODO: send attachements (Adding Attachments Using the email Package)
+# TODO: Sending Multiple Personalized Emails
+# TODO: Yagmail
+
 
 def main():
+    # let user choose which protocol to use
     protocol = utils.get_user_input_protocol()
 
     # define credentials
-    sender_email = input('Enter sender email: ')
+    sender_email = utils.insert_valid_email(who='sender', domain='gmail.com')
     other_credentials = utils.set_credentials(protocol)
-    receiver_email = input('Enter receiver email: ')
+    receiver_email = utils.insert_valid_email(who='receiver')
 
     # write email message
     message = utils.write_email(sender_email, receiver_email)

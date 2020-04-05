@@ -1,9 +1,8 @@
 # Send emails with Python
 
 # SMTP: Simple Mail Transfer Protocol
-# SSL: Secure Sockets Layer
-# TLS: Transport Layer Security
-# SSL creates a secure connection from the beginning, while TLS encryptes it when I need it
+# SSL: Secure Sockets Layer - creates a secure connection from the beginning
+# TLS: Transport Layer Security - encryptes connection when need it
 
 import smtplib
 import ssl
@@ -12,9 +11,9 @@ from getpass import getpass
 smtp_server = 'smtp.gmail.com'
 port = 465
 
-sender = input('Input sender email: ')
+sender = input('Enter sender email: ')
 password = getpass('Email password: ')
-receiver = input('Input receiver email: ')
+receiver = input('Enter receiver email: ')
 
 message = f"""\
 From: {sender}

@@ -1,23 +1,26 @@
 # Send emails with Python
 
 # SMTP: Simple Mail Transfer Protocol
-# SSL: Secure Sockets Layer
-# TLS: Transport Layer Security
-# SSL creates a secure connection from the beginning, while TLS encryptes it when I need it
+# SSL: Secure Sockets Layer - creates a secure connection from the beginning
+# TLS: Transport Layer Security - encryptes connection when need it
 # HTML: Hypertext Markup Language
-# MIME: Multipurpose Internet Mail Extensions. Today’s most common type of email (plain text + HTML)
+# MIME: Multipurpose Internet Mail Extensions. Most common type (text + HTML)
 
 import smtplib
 import ssl
 from getpass import getpass
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from email.mime.base import MIMEBase
+from email import encoders
 import re
+import os
 
 
 def get_user_input_protocol():
     while True:
-        protocol = input("Wich protocol do you want to use? (SSL, TLS, localhost): ").lower()
+        prompt = "Wich protocol do you want to use? (SSL, TLS, localhost): "
+        protocol = input(prompt).lower()
         if protocol in ('ssl', 'tls', 'localhost'):
             if protocol == 'localhost':
                 print('Remember to run a localhost. Ex: python -m smtpd -c DebuggingServer -n localhost:1025')
@@ -46,17 +49,17 @@ def set_credentials(protocol):
         return smtp_server, port, context, password
 
 
-def send_email_ssl(smtp_server, port, context, password,
-                   sender_email, receiver_email, message):
+def send_email_ssl(smtp_server, port, context, password, sender_email,
+                   receiver_email, message):
     with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
         server.login(sender_email, password)
         print('You have successfully logged in!')
         server.sendmail(sender_email, receiver_email, message)
-        print('You just sent an email.')
+        print(f'You just sent an email to {receiver_email}.')
 
 
-def send_email_tls(smtp_server, port, context, password,
-                   sender_email, receiver_email, message):
+def send_email_tls(smtp_server, port, context, password, sender_email,
+                   receiver_email, message):
     try:
         server = smtplib.SMTP(smtp_server, port)
         server.ehlo()
@@ -67,39 +70,41 @@ def send_email_tls(smtp_server, port, context, password,
         server.login(sender_email, password)
         print('You have successfully logged in!')
         server.sendmail(sender_email, receiver_email, message)
-        print('You just sent an email.')
+        print(f'You just sent an email to {receiver_email}.')
     except Exception as e:
         print(e)
     finally:
         server.quit()
 
 
-def send_email_localhost(smtp_server, port, sender_email,
-                         receiver_email, message):
+def send_email_localhost(smtp_server, port, sender_email, receiver_email,
+                         message):
     # Note: if you use a local server you do not need any encryption
     try:
         server = smtplib.SMTP(smtp_server, port)
         server.sendmail(sender_email, receiver_email, message)
-        print('You just sent an email.')
+        print(f'You just sent an email to {receiver_email}.')
     except Exception as e:
         print(e)
     finally:
         server.quit()
 
 
-def write_email(sender_email, receiver_email):
+def write_email(sender_email, receiver_email, attachment_filename=None):
+
     message = MIMEMultipart("alternative")
     message["Subject"] = "MIME test"
     message["From"] = sender_email
     message["To"] = receiver_email
+    message["Bcc"] = receiver_email  # Recommended for mass emails
 
     # Create the plain-text and HTML version of your message
-    text = """\
+    body_text = """\
     Hi,
     How are you?
     This is the plain text version of the mail.
     """
-    html = """\
+    body_html = """\
     <html>
       <body>
         <p>Hi,<br>
@@ -114,15 +119,34 @@ def write_email(sender_email, receiver_email):
     """
 
     # Turn these into plain/html MIMEText objects
-    part1 = MIMEText(text, "plain")
-    part2 = MIMEText(html, "html")
+    part1 = MIMEText(body_text, "plain")
+    part2 = MIMEText(body_html, "html")
 
     # Add HTML/plain-text parts to MIMEMultipart message
     # The email client will try to render the last part first
     message.attach(part1)
     message.attach(part2)
 
-    return message
+    if attachment_filename:
+        # Open attachment file in binary mode
+        with open(attachment_filename, "rb") as attachment:
+            # Add file as application/octet-stream
+            # Email client can usually download this automatically as attachment
+            part3 = MIMEBase("application", "octet-stream")
+            part3.set_payload(attachment.read())
+
+        # Encode file in ASCII characters to send by email
+        encoders.encode_base64(part3)
+
+        # Add header as key/value pair to attachment part
+        part3.add_header(
+            "Content-Disposition",
+            f"attachment; filename= {os.path.basename(attachment_filename)}",
+        )
+        # Add attachment to message and convert message to string
+        message.attach(part3)
+
+    return message.as_string()
 
 def insert_valid_email(who, domain=None):
     if domain:

@@ -1,9 +1,8 @@
 # Send emails with Python
 
 # SMTP: Simple Mail Transfer Protocol
-# SSL: Secure Sockets Layer
-# TLS: Transport Layer Security
-# SSL creates a secure connection from the beginning, while TLS encryptes it when I need it
+# SSL: Secure Sockets Layer - creates a secure connection from the beginning
+# TLS: Transport Layer Security - encryptes connection when need it
 # If you use a local server you do not need any encryption
 # to run a localhost in Python run: python -m smtpd -c DebuggingServer -n localhost:1025
 
@@ -12,8 +11,8 @@ import smtplib
 smtp_server = 'localhost'
 port = 1025
 
-sender = input('Input sender email: ')
-receiver = input('Input receiver email: ')
+sender = input('Enter sender email: ')
+receiver = input('Enter receiver email: ')
 
 print('Remember to run a localhost. Ex: python -m smtpd -c DebuggingServer -n localhost:1025')
 

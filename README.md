@@ -18,8 +18,7 @@ The scripts of this project allow you to send automatic emails from/to your loca
 
 1. Sending email from and to your localhost is easier, you don't need to create a real email address and your computer is sending a message to itself. Just remember to run
 ```
-python -m smtpd -c DebuggingServer -n localhost:1025
-```
+python -m smtpd -c DebuggingServer -n localhost:1025 ```
 in a terminal window for your localhost to receive these emails. The received emails will be displayed in your terminal. Since everything is happening locally, there is no need to encrypt any connection. To use your local host to need the server name ('localhost') and a port number (1025 in this case).
 
 2. To start sending real emails, it is suggested to use a <em>Gmail</em> account explicitely created for sending automatic emails, with modified security restrictions (see <a href="https://realpython.com/python-send-email/" target="_blank" rel="noopener nofollow noreferrer">Sending Emails With Python</a> for more detail). The scripts will then ask for your email address and password to automatically login to your email account and send emails from there. In this case the connection must be encrypted for security reasons, either with SSL or TLS. To connect to your <em>Gmail</em> account you need the server name ('smtp.gmail.com') and the port number (465 for SSL and 587 for TLS).
@@ -71,7 +70,7 @@ Finally, the folder `single_scripts` contains some useful scripts:
 
 ## Acknowledgements
 
-Most of this content is inspired by *Sending Emails With Python* from <a href="https://realpython.com/python-send-email/" target="_blank" rel="noopener nofollow noreferrer">realpython.com</a>
+Most of this content was inspired by *Sending Emails With Python* from [realpython.com](https://realpython.com/python-send-email).
 
 ## License
 

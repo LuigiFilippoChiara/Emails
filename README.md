@@ -2,7 +2,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](/LICENSE)
 
 Learning how to send emails with Python.  
-Note: if you have a <em>Gmail</em> account, the easiest solution is to use **yagmail**.
+Note: if you have a <em>Gmail</em> account, the easiest solution is to use [**yagmail**](https://yagmail.readthedocs.io/en/latest/).
 
 ## Some theory
 
@@ -31,18 +31,24 @@ in a terminal window for your localhost to receive these emails. The received em
 
 First of all, `fork` this repo and then `clone` your fork to have a local copy. All the data comes with the repo.
 
-To use **yagmail** you need to install it by running
-
-```
-pip install yagmail[all]
-```
-in a terminal. It is recommended to install it with the `[all]` specification, to install the **keyring** library too.
-
-Alternatively, you can use this project's environment with
+To use **yagmail** you first need to install it. You can create this project's environment with
 
 ```
 conda env create -f emails_with_python.yml
 ```
+and then activate it with
+
+```
+conda activate emails_with_python
+```
+  
+Alternatively, you can install **yagmail** directly by running
+
+```
+pip install yagmail[all]
+```
+
+in a terminal. It is recommended to install it with the `[all]` specification, in order to install the **keyring** library too.
 
 ## Scripts description
 

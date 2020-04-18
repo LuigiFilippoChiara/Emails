@@ -9,7 +9,7 @@ import smtplib
 import ssl
 from getpass import getpass
 
-contacts_file = "../data/contacts_file.csv"
+contacts_file = "../data/contact_details.csv"
 
 message = """\
 Subject: Hi there!

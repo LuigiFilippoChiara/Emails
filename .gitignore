@@ -2,7 +2,6 @@
 *.idea
 
 # data
-*.csv
 *.zip
 *.gz
 *.bz2

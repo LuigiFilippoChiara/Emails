@@ -17,3 +17,5 @@ yag.send(
     contents=body,
     attachments=attachment_filename,
 )
+
+print("Done!")

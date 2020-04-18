@@ -61,7 +61,7 @@ Finally, the folder `single_scripts` contains some useful scripts:
 2. `ssl_send_email.py` sends a single plain text email from your <em>Gmail</em> account with **SSL** encryption.
 3. `tls_send_email.py` sends a single plain text email from your <em>Gmail</em> account with **TLS** encryption.
 4. `yagmail_send_email.py` sends a plain text single email with a pdf attachment from your <em>Gmail</em> account, using **yagmail**.
-5. `send_many_emails.py` sends personalised automatic plain text emails in a for loop, taking the contact details from `data/contacts_file.csv`. The connection is encrypted with **SSL**.
+5. `send_many_emails.py` sends personalised automatic plain text emails in a for loop, taking the contact details from `data/contact_details.csv`. The connection is encrypted with **SSL**.
 
 ## Acknowledgements
 

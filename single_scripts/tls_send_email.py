@@ -35,7 +35,7 @@ try:
     server.login(sender, password)
     print('You have successfully logged in!')
     server.sendmail(sender, receiver, message)
-    print('You just sent an email.')
+    print(f'You just sent an email to {receiver}')
 except Exception as e:
     print(e)
 finally:

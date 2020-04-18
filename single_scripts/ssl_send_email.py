@@ -29,4 +29,4 @@ with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
     server.login(sender, password)
     print('You have successfully logged in!')
     server.sendmail(sender, receiver, message)
-    print('You just sent an email.')
+    print(f'You just sent an email to {receiver}')

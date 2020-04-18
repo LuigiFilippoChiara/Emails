@@ -8,6 +8,7 @@
 
 import utils
 
+
 def main():
     # let user choose which protocol to use
     protocol = utils.get_user_input_protocol()

@@ -14,8 +14,6 @@ port = 1025
 sender = input('Enter sender email: ')
 receiver = input('Enter receiver email: ')
 
-print('Remember to run a localhost. Ex: python -m smtpd -c DebuggingServer -n localhost:1025')
-
 message = f"""\
 From: {sender}
 To: {receiver}
@@ -27,8 +25,9 @@ This message was sent from Python!
 try:
     server = smtplib.SMTP(smtp_server, port)
     server.sendmail(sender, receiver, message)
-    print('You just sent an email.')
+    print(f'You just sent an email to {receiver}')
 except Exception as e:
     print(e)
+    print('Remember to run a localhost. Ex: python -m smtpd -c DebuggingServer -n localhost:1025')
 finally:
     server.quit()

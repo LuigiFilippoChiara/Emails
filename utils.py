@@ -148,6 +148,7 @@ def write_email(sender_email, receiver_email, attachment_filename=None):
 
     return message.as_string()
 
+
 def insert_valid_email(who, domain=None):
     if domain:
         EMAIL_REGEX = re.compile(fr'^[a-z0-9_\.-]+@{domain}$')
@@ -160,9 +161,10 @@ def insert_valid_email(who, domain=None):
         if match:
             break
         if domain:
-            print(f"Sorry, this is not a valid email. Remember to use the {domain} domain.")
+            print(f"Sorry, this is not a valid email address. For this script to work, "
+                  f"remeber to use the {domain} domain.")
         else:
-            print(f"Sorry, this is not a valid email.")
+            print(f"Sorry, this is not a valid email address.")
 
     return match.group()
 

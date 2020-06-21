@@ -1,4 +1,4 @@
-name: emails_with_python
+name: emails-with-python
 channels:
   - defaults
 dependencies:
@@ -22,5 +22,5 @@ dependencies:
   - pip:
     - keyring==21.2.0
     - yagmail==0.11.224
-prefix: /opt/anaconda3/envs/emails_with_python
+prefix: /opt/anaconda3/envs/emails-with-python
 

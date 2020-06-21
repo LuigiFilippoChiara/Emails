@@ -35,12 +35,12 @@ First of all, `fork` this repo and then `clone` your fork to have a local copy. 
 To use **yagmail** you first need to install it. You can create this project's environment with
 
 ```
-$ conda env create -f emails_with_python.yml
+$ conda env create -f emails-with-python.yml
 ```
 and then activate it with
 
 ```
-$ conda activate emails_with_python
+$ conda activate emails-with-python
 ```
   
 Alternatively, you can install **yagmail** directly by running
